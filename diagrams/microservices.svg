@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 1400 800">
+  <style>
+    .box { fill:#f5f7fb; stroke:#2b6cb0; stroke-width:2; rx:8; }
+    .box-auth { fill:#e6fffa; stroke:#2c7a7b; }
+    .box-acad { fill:#ebf8ff; stroke:#2b6cb0; }
+    .box-att { fill:#fffaf0; stroke:#b7791f; }
+    .box-msg { fill:#f5f3ff; stroke:#6b46c1; }
+    .db { fill:#f0fff4; stroke:#2f855a; }
+    .label { font-family: Arial, sans-serif; font-size:16px; fill:#1a202c; }
+    .title { font-family: Arial, sans-serif; font-size:20px; font-weight:700; fill:#1a202c; }
+    .note { font-family: Arial, sans-serif; font-size:13px; fill:#2d3748; }
+    .arrow { stroke:#2d3748; stroke-width:2; fill:none; marker-end:url(#arrowhead); }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2d3748" />
+    </marker>
+  </defs>
+
+  <text x="20" y="30" class="title">Diagrama de Microservicios — Plataforma Libro de Clases</text>
+
+  <!-- Frontend -->
+  <rect x="40" y="90" width="220" height="80" class="box"/>
+  <text x="150" y="140" text-anchor="middle" class="label">Frontend (Web / Móvil)</text>
+
+  <!-- API Gateway -->
+  <rect x="320" y="80" width="260" height="110" class="box"/>
+  <text x="450" y="110" text-anchor="middle" class="label">API Gateway
+  </text>
+  <text x="450" y="130" text-anchor="middle" class="note">(Spring Cloud Gateway)</text>
+
+  <!-- Services -->
+  <rect x="650" y="30" width="220" height="90" class="box-auth"/>
+  <text x="760" y="80" text-anchor="middle" class="label">auth-service</text>
+  <text x="760" y="100" text-anchor="middle" class="note">Autenticación / Usuarios</text>
+
+  <rect x="650" y="140" width="220" height="90" class="box-acad"/>
+  <text x="760" y="190" text-anchor="middle" class="label">academic-service</text>
+  <text x="760" y="210" text-anchor="middle" class="note">Gestión Académica</text>
+
+  <rect x="650" y="250" width="220" height="90" class="box-att"/>
+  <text x="760" y="300" text-anchor="middle" class="label">attendance-service</text>
+  <text x="760" y="320" text-anchor="middle" class="note">Asistencia y Anotaciones</text>
+
+  <rect x="650" y="360" width="220" height="90" class="box-msg"/>
+  <text x="760" y="410" text-anchor="middle" class="label">messaging-service</text>
+  <text x="760" y="430" text-anchor="middle" class="note">Portal Mensajería</text>
+
+  <!-- DB -->
+  <rect x="440" y="500" width="320" height="110" class="db" rx="12"/>
+  <text x="600" y="560" text-anchor="middle" class="label">PostgreSQL (BD única)</text>
+  <text x="600" y="585" text-anchor="middle" class="note">Ownership lógico por servicio</text>
+
+  <!-- Arrows -->
+  <path d="M260 130 L320 130" class="arrow" />
+  <path d="M580 130 L650 85" class="arrow" />
+  <path d="M580 130 L650 185" class="arrow" />
+  <path d="M580 130 L650 295" class="arrow" />
+  <path d="M580 130 L650 405" class="arrow" />
+
+  <path d="M760 120 L760 500" class="arrow" />
+  <path d="M760 200 L760 500" class="arrow" />
+  <path d="M760 310 L760 500" class="arrow" />
+  <path d="M760 420 L760 500" class="arrow" />
+
+  <!-- Notes -->
+  <rect x="1010" y="70" width="360" height="140" fill="#ffffff" stroke="#cbd5e0" rx="8" />
+  <text x="1030" y="95" class="note">Patrones y componentes:</text>
+  <text x="1030" y="115" class="note">• Repository (Spring Data JPA)</text>
+  <text x="1030" y="135" class="note">• Factory Method (creación DTO/Entidad)</text>
+  <text x="1030" y="155" class="note">• Circuit Breaker (Resilience4j)</text>
+
+  <rect x="1010" y="230" width="360" height="120" fill="#ffffff" stroke="#cbd5e0" rx="8" />
+  <text x="1030" y="255" class="note">Notas operacionales:</text>
+  <text x="1030" y="275" class="note">• Gateway valida JWT y enruta</text>
+  <text x="1030" y="295" class="note">• Servicios stateless, escalado horizontal</text>
+  <text x="1030" y="315" class="note">• Migrar a DB por servicio en futuro</text>
+
+</svg>

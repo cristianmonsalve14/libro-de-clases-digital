@@ -1,0 +1,39 @@
+@startuml
+skinparam rectangle {
+  Shadowing false
+}
+actor "Frontend (Web / Móvil)" as FE
+
+rectangle "API Gateway\n(Spring Cloud Gateway)" as GW
+
+rectangle "auth-service\n(Autenticación / Usuarios)" as AUTH
+rectangle "academic-service\n(Gestión Académica)" as ACADEMIC
+rectangle "attendance-service\n(Asistencia y Anotaciones)" as ATTEND
+rectangle "messaging-service\n(Portal Mensajería)" as MSG
+
+database "PostgreSQL (BD única)" as DB
+
+FE --> GW : "HTTP + JWT"
+GW --> AUTH : "/auth/* (validación JWT)"
+GW --> ACADEMIC : "REST API (JSON)"
+GW --> ATTEND : "REST API (JSON)"
+GW --> MSG : "REST API (JSON)"
+
+ACADEMIC --> DB : "Lectura / Escritura\n(tablas académicas)"
+ATTEND --> DB : "Lectura / Escritura\n(tablas de asistencia)"
+MSG --> DB : "Lectura / Escritura\n(tablas de mensajería)"
+AUTH --> DB : "Lectura / Escritura\n(tablas de usuarios y roles)"
+
+note right of GW
+  Gateway: enrutamiento, validación JWT, rate-limit, CORS
+end note
+
+note left of ACADEMIC
+  Patrones aplicados:\n- Repository (Spring Data JPA)\n- Factory Method (DTO -> Entidad)\n- Circuit Breaker (Resilience4j) para llamadas externas
+end note
+
+note bottom of DB
+  Decisión: BD única (PostgreSQL) por fase inicial.\nOwnership lógico: cada servicio gestiona sus tablas.\nRecomendación: migrar a DB por servicio en fases posteriores.
+end note
+
+@enduml
