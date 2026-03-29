@@ -147,6 +147,8 @@ matriculas }o--|| cursos
 sesiones ||--o{ asistencias
 evaluaciones ||--o{ calificaciones
 estudiantes ||--o{ calificaciones
+estudiantes ||--o{ anotaciones
+docentes ||--o{ anotaciones
 mensajes ||--o{ dest
 usuarios ||--o{ mensajes : "envía"
 dest }o--|| usuarios : "recibe"
